@@ -49,14 +49,14 @@ function App() {
         <div style={{ display: 'flex', flexWrap: 'wrap', }}>
           <p style={{ fontSize: '1.2rem', width: '100%' }}>Shortcut key:</p>
           <div>
-            <kbd>⌘</kbd> + <kbd>Shift</kbd> + <kbd>🔼</kbd>
+            <kbd>Shift</kbd> + <kbd>🔼</kbd>
           </div>
           <div style={{ flex: 1, textAlign: 'right', margin: '0 10px' }}>
             <Switch defaultChecked onChange={onChangeSwitch} />
           </div>
           <div style={{ width: '100%', height: '0.5rem' }}></div>
           <div>
-            <kbd>⌘</kbd> + <kbd>Shift</kbd> + <kbd>🔽</kbd>
+            <kbd>Shift</kbd> + <kbd>🔽</kbd>
           </div>
           <div style={{ flex: 1, textAlign: 'right', margin: '0 10px' }}>
             <Switch defaultChecked onChange={onChangeSwitch} />
