@@ -17,7 +17,7 @@ function useStorage<TValue>(
       try {
         // 尝试从storage中获取值
         const storedValue = (await storage.getMeta(meta))[key];
-        setValue(storedValue? storedValue as TValue : initialValue);
+        setValue(storedValue !== undefined ? (storedValue as TValue) : initialValue);
       } catch (error) {
         console.error("获取存储值出错:", error);
         setValue(initialValue); // 出错时回退到初始值
@@ -46,4 +46,18 @@ function useStorage<TValue>(
   return [value, setValue] as const;
 }
 
-export default useStorage;
+async function get<TValue>(
+  key: string,
+  defaultValue: TValue,
+  type: string = "local"
+) : Promise<TValue|undefined> {
+  const meta = type === "local" ? `local:perf` : `session:perf`;
+  const v = (await storage.getMeta(meta))[key];
+  return v !== undefined ? (v as TValue) : defaultValue;
+}
+
+
+export const WxtStorage = {
+  useStorage: useStorage,
+  get: get,
+};

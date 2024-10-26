@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import { UTIL } from '../util/utils';
 import { Divider, Radio, RadioChangeEvent, Space, Switch } from 'antd';
-import useStorage from '../util/hooks';
+import { WxtStorage } from '../util/hooks';
+import { CONSTANTS } from '../util/constants';
 
 function App() {
   const [host, setHost] = useState<string>('');
@@ -17,14 +18,27 @@ function App() {
     fetchHost();
   }, []);
 
-  const [value, setValue] = useStorage<number>('local:state:quick-scroll' + host, 1);
+  const [value, setValue] = WxtStorage.useStorage<number>(CONSTANTS.hostStatePrefix + host, 1);
+  const [arrowUp, setArrowUp] = WxtStorage.useStorage<boolean>(CONSTANTS.arrowUpStateKey, true);
+  const [arrowDown, setArrowDown] = WxtStorage.useStorage<boolean>(CONSTANTS.arrowDownStateKey, true);
+
+  console.log('host:', host);
+  console.log('value:', value);
+  console.log('arrowUp:', arrowUp);
+  console.log('arrowDown:', arrowDown);
 
   const onChange = (e: RadioChangeEvent) => {
     setValue(e.target.value as number);
   };
 
-  const onChangeSwitch = (checked: boolean) => {
+  const onArrowUpChangeSwitch = (checked: boolean) => {
     console.log(`switch to ${checked}`);
+    setArrowUp(checked);
+  };
+
+  const onArrowDownChangeSwitch = (checked: boolean) => {
+    console.log(`switch to ${checked}`);
+    setArrowDown(checked);
   };
 
   return (
@@ -52,14 +66,14 @@ function App() {
             <kbd>Shift</kbd> + <kbd>🔼</kbd>
           </div>
           <div style={{ flex: 1, textAlign: 'right', margin: '0 10px' }}>
-            <Switch defaultChecked onChange={onChangeSwitch} />
+            <Switch checked={arrowUp} onChange={onArrowUpChangeSwitch} />
           </div>
           <div style={{ width: '100%', height: '0.5rem' }}></div>
           <div>
             <kbd>Shift</kbd> + <kbd>🔽</kbd>
           </div>
           <div style={{ flex: 1, textAlign: 'right', margin: '0 10px' }}>
-            <Switch defaultChecked onChange={onChangeSwitch} />
+            <Switch checked={arrowDown} onChange={onArrowDownChangeSwitch} />
           </div>
         </div>
       </main>
