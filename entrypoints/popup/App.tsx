@@ -49,7 +49,7 @@ function App() {
       <main>
         <Divider />
 
-        <p style={{ fontSize: '1.2rem' }}>Buttons Config</p>
+        <p style={{ fontSize: '1.2rem' }}>Buttons</p>
         <Radio.Group onChange={onChange} value={value}>
           <Space direction="vertical">
             <Radio value={1}>Enable on this site</Radio>
