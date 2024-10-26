@@ -5,4 +5,7 @@ export default defineConfig({
   extensionApi: 'chrome',
   modules: ['@wxt-dev/module-react'],
   outDir: 'dist',
+  manifest: {
+    permissions: ['storage'],
+  }
 });
