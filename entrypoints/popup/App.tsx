@@ -11,7 +11,6 @@ function App() {
   useEffect(() => {
     const fetchHost = async () => {
       const currentHost = await UTIL.getCurrentTabDomain();
-      console.log('current host:', currentHost);
       setHost(currentHost);
     };
 
@@ -27,8 +26,9 @@ function App() {
   console.log('arrowUp:', arrowUp);
   console.log('arrowDown:', arrowDown);
 
-  const onChange = (e: RadioChangeEvent) => {
-    setValue(e.target.value as number);
+  const onChange = async (e: RadioChangeEvent) => {
+    const s = e.target.value as number
+    setValue(s);
   };
 
   const onArrowUpChangeSwitch = (checked: boolean) => {
@@ -54,7 +54,6 @@ function App() {
           <Space direction="vertical">
             <Radio value={1}>Enable on this site</Radio>
             <Radio value={2}>Disable on this site</Radio>
-            <Radio value={3}>Disable this time only</Radio>
           </Space>
         </Radio.Group>
 
