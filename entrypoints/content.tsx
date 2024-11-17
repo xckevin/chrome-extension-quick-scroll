@@ -7,8 +7,9 @@ import { CONSTANTS } from "./util/constants";
 
 export default defineContentScript({
   matches: ["*://*/*"],
+  cssInjectionMode: 'ui',
 
-  main(ctx) {
+  async main(ctx) {
     ctx.addEventListener(document, "keydown", async (e) => {
       // key down event
       if (e.shiftKey) {
@@ -24,18 +25,27 @@ export default defineContentScript({
       }
 
     });
-    const ui = createIntegratedUi(ctx, {
+    const ui = await createShadowRootUi(ctx, {
+      name: 'quick-scroll',
       position: "inline",
       anchor: "body",
       onMount: (container) => {
         // Create a root on the UI container and render a component
-        const root = ReactDOM.createRoot(container);
+        // const root = ReactDOM.createRoot(container);
+        // root.render(<Content />);
+        // container.append(root);
+
+        // Don't mount react app directly on <body>
+        const wrapper = document.createElement("div");
+        container.append(wrapper);
+
+        const root = ReactDOM.createRoot(wrapper);
         root.render(<Content />);
-        return root;
+        return { root, wrapper };
       },
-      onRemove: (root) => {
-        // Unmount the root when the UI is removed
-        root?.unmount();
+      onRemove: (elements) => {
+        elements?.root.unmount();
+        elements?.wrapper.remove();
       },
     });
 

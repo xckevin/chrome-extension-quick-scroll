@@ -8,7 +8,7 @@ export default defineConfig({
   manifest: {
     name: 'Quick Scroll',
     description: 'A Chrome extension to quickly scroll to the top or bottom of a web page.',
-    version: '1.0.0',
+    version: '1.0.1',
     author: 'liukai',
     permissions: ['storage'],
   }
