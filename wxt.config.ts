@@ -1,15 +1,16 @@
-import { defineConfig } from 'wxt';
+import { defineConfig } from "wxt";
 
 // See https://wxt.dev/api/config.html
 export default defineConfig({
-  extensionApi: 'chrome',
-  modules: ['@wxt-dev/module-react'],
-  outDir: 'dist',
+  extensionApi: "chrome",
+  modules: ["@wxt-dev/module-react", "@wxt-dev/i18n/module"],
+  outDir: "dist",
   manifest: {
-    name: 'Quick Scroll',
-    description: 'A Chrome extension to quickly scroll to the top or bottom of a web page.',
-    version: '1.0.1',
-    author: 'liukai',
-    permissions: ['storage'],
-  }
+    default_locale: "en",
+    name: "__MSG_extName__",
+    description: "__MSG_extDescription__",
+    version: "1.0.1",
+    author: "liukai",
+    permissions: ["storage"],
+  },
 });

@@ -4,6 +4,7 @@ import { UTIL } from '../util/utils';
 import { Divider, Radio, RadioChangeEvent, Space, Switch } from 'antd';
 import { WxtStorage } from '../util/hooks';
 import { CONSTANTS } from '../util/constants';
+import { i18n } from '#i18n';
 
 function App() {
   const [host, setHost] = useState<string>('');
@@ -44,23 +45,23 @@ function App() {
   return (
     <>
       <header>
-        <p style={{ fontSize: '1.5rem', textAlign: 'center' }}>Quick Scroll</p>
+        <p style={{ fontSize: '1.5rem', textAlign: 'center' }}>{i18n.t('extName')}</p>
       </header>
       <main>
         <Divider />
 
-        <p style={{ fontSize: '1.2rem' }}>Buttons</p>
+        <p style={{ fontSize: '1.2rem' }}>{i18n.t('Buttons')}</p>
         <Radio.Group onChange={onChange} value={value}>
           <Space direction="vertical">
-            <Radio value={1}>Enable on this site</Radio>
-            <Radio value={2}>Disable on this site</Radio>
+            <Radio value={1}>{i18n.t('enableThisSite')}</Radio>
+            <Radio value={2}>{i18n.t('disableThisSite')}</Radio>
           </Space>
         </Radio.Group>
 
         <Divider />
 
         <div style={{ display: 'flex', flexWrap: 'wrap', }}>
-          <p style={{ fontSize: '1.2rem', width: '100%' }}>Shortcut key:</p>
+          <p style={{ fontSize: '1.2rem', width: '100%' }}>{i18n.t('shortCutKey')}</p>
           <div>
             <kbd>Shift</kbd> + <kbd>🔼</kbd>
           </div>
